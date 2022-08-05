@@ -6,7 +6,7 @@
 /*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:57:28 by pmethira          #+#    #+#             */
-/*   Updated: 2022/07/28 13:46:31 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/05 16:01:49 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,13 @@ void	reserve_word(char const *s, char c, char **list)
 		i = al_count(str, c);
 		list[j] = (char *)malloc(sizeof(char) * (i + 1));
 		if (!list[j])
+		{
+			i = 0;
+			while (list[i])
+				free(list[i++]);
+			free(list);
 			return ;
+		}
 		word_add(str, c, list[j]);
 		while (*str != c && *str)
 			str++;
