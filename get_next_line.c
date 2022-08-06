@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmethira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 10:04:57 by vnilprap          #+#    #+#             */
-/*   Updated: 2022/07/30 13:38:29 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/04 14:07:16 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static char	*ft_getsub(char *s)
 		free(s);
 		free(sub);
 		sub = tmp;
+		free(tmp);
 		return (0);
 	}
 	return (0);
