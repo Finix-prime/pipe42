@@ -6,7 +6,7 @@
 /*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:57:16 by pmethira          #+#    #+#             */
-/*   Updated: 2022/08/08 14:05:44 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:26:35 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,12 @@ void	error(t_data *pipex, char **cmd)
 			return ;
 		i++;
 	}
-	perror(cmd[0]);
+	perror("command not found");
 	free(pipex->cmd_path);
 	free2(pipex->path);
 	free2(pipex->cmd);
-	free2(pipex->av);
 	free(pipex->path);
 	free(pipex->cmd);
-	free(pipex->av);
 	free(pipex);
 	exit(0);
 }

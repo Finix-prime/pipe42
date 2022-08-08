@@ -6,7 +6,7 @@
 /*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 19:01:30 by pmethira          #+#    #+#             */
-/*   Updated: 2022/08/08 14:04:54 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:43:22 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,11 @@ void	init(t_data *pipex, int argc, char **argv, char **envp)
 	}
 	else
 		pipex->fdin = open(argv[1], O_RDONLY);
+	if (pipex->fdin == -1)
+	{
+		perror("file not found");
+		exit(0);
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -123,6 +128,8 @@ int	main(int argc, char **argv, char **envp)
 	init(pipex, argc, argv, envp);
 	here(pipex);
 	piping(pipex, envp);
+	if (ft_strncmp("here_doc", pipex->av[1], 7) == 0)
+		unlink("here_doc");
 	free2(pipex->path);
 	free(pipex->path);
 	free(pipex->cmd);
