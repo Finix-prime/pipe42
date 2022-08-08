@@ -6,34 +6,11 @@
 /*   By: pmethira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 19:01:30 by pmethira          #+#    #+#             */
-/*   Updated: 2022/08/04 14:12:39 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/08 13:41:12 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	path_join(char *s1, char *s2, char *dst)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		dst[i] = s1[i];
-		i++;
-	}
-	dst[i] = '/';
-	i++;
-	while (s2[j])
-	{
-		dst[i] = s2[j];
-		i++;
-		j++;
-	}
-	dst[i] = 0;
-}
 
 void	error(t_data *pipex, char **cmd)
 {
@@ -50,7 +27,14 @@ void	error(t_data *pipex, char **cmd)
 	}
 	perror(cmd[0]);
 	free(pipex->cmd_path);
-	pipex->cmd_path = 0;
+	free2(pipex->path);
+	free2(pipex->cmd);
+	free2(pipex->av);
+	free(pipex->path);
+	free(pipex->cmd);
+	free(pipex->av);
+	free(pipex);
+	exit(0);
 }
 
 void	forking(t_data *pipex, char **envp)
@@ -88,14 +72,8 @@ void	piping(t_data *pipex, char **envp)
 		pipex->cmd = split(pipex->av[pipex->av_index], ' ');
 		error(pipex, pipex->cmd);
 		forking(pipex, envp);
-		while (pipex->cmd[i])
-		{
-			free(pipex->cmd[i]);
-			i++;
-		}
-		free(pipex->cmd);
+		free2(pipex->cmd);
 		pipex->cmd = 0;
-		free(pipex->cmd_path);
 		pipex->cmd_path = 0;
 		pipex->av_index++;
 	}
@@ -129,17 +107,10 @@ void	here(t_data *pipex)
 	return ;
 }
 
-int	main(int argc, char **argv, char **envp)
+void	init(t_data *pipex, int argc, char **argv, char **envp)
 {
-	t_data	*pipex;
-	int		i;
+	int	i;
 
-	if (argc < 5)
-	{
-		perror("argument error");
-		return (0);
-	}
-	pipex = (t_data *)malloc(sizeof(t_data));
 	pipex->ac = argc;
 	i = 0;
 	while (ft_strncmp("PATH", envp[i], 4))
@@ -148,17 +119,35 @@ int	main(int argc, char **argv, char **envp)
 	pipex->ev = envp[i] + 5;
 	pipex->path = split(pipex->ev, ':');
 	pipex->av_index = 2;
-	if (ft_strncmp("here_doc", pipex->av[1], 7))
+	if (ft_strncmp("here_doc", pipex->av[1], 7) == 0)
+	{
+		if (argc < 6)
+		{
+			perror("error invalid argument");
+			exit(0);
+		}
+	}
+	else
 		pipex->fdin = open(argv[1], O_RDONLY);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_data	*pipex;
+	int		i;
+
+	if (argc < 5)
+	{
+		perror("error invalid argument");
+		return (0);
+	}
+	pipex = (t_data *)malloc(sizeof(t_data));
+	init(pipex, argc, argv, envp);
 	here(pipex);
 	piping(pipex, envp);
-	i = 0;
-	while (pipex->path[i])
-	{
-		free(pipex->path[i]);
-		i++;
-	}
+	free2(pipex->path);
 	free(pipex->path);
+	free(pipex->cmd);
 	free(pipex->cmd_path);
 	free(pipex);
 	return (0);

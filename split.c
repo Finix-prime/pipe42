@@ -6,7 +6,7 @@
 /*   By: pmethira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:57:28 by pmethira          #+#    #+#             */
-/*   Updated: 2022/08/06 20:39:20 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/07 18:37:55 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,18 @@ int	wd_count(char const *s, char c)
 	return (word);
 }
 
-int	al_count(char *str, char c)
+char	**free2(char **s)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while (str[i] != c && str[i])
+	while (s[i])
 	{
-		i++;
+		free(s[i]);
+		s++;
 	}
-	return (i);
+	s = 0;
+	return (s);
 }
 
 void	word_add(char *str, char c, char *list)
@@ -73,10 +75,7 @@ void	reserve_word(char const *s, char c, char **list)
 		list[j] = (char *)malloc(sizeof(char) * (i + 1));
 		if (!list[j])
 		{
-			i = 0;
-			while (list[i])
-				free(list[i++]);
-			free(list);
+			list = free2(list);
 			return ;
 		}
 		word_add(str, c, list[j]);

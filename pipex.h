@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmethira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:33:50 by pmethira          #+#    #+#             */
-/*   Updated: 2022/08/05 15:38:06 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/06 21:09:19 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 size_t	ft_strlen(char const *s);
+void	path_join(char *s1, char *s2, char *dst);
 int		execve(const char *pathname, char *const argv[], char *const envp[]);
 int		access(const char *pathname, int mode);
 int		wd_count(char const *s, char c);
@@ -55,5 +56,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin_pipe(char const *s1, char const *s2);
 char	*get_next_line(int fd);
 void	freeall(t_data *pipex);
+char	**free2(char **s);
+int		al_count(char *str, char c);
 
 #endif

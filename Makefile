@@ -2,7 +2,7 @@
 
 NAME = pipex
 FLAGS = -Wall -Werror -Wextra -I
-SRCS = main.c pon.c utils.c get_next_line.c get_next_line_utils.c
+SRCS = main.c split.c utils.c get_next_line.c get_next_line_utils.c
 
 all:
 	@gcc -g $(SRCS) -o $(NAME)
