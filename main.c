@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmethira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 19:01:30 by pmethira          #+#    #+#             */
-/*   Updated: 2022/08/08 13:41:12 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/08 14:04:54 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	error(t_data *pipex, char **cmd)
-{
-	int		i;
-
-	i = 0;
-	pipex->cmd_path = (char *)malloc(100000);
-	while (pipex->path[i])
-	{
-		path_join(pipex->path[i], cmd[0], pipex->cmd_path);
-		if (access(pipex->cmd_path, F_OK | X_OK | R_OK) == 0)
-			return ;
-		i++;
-	}
-	perror(cmd[0]);
-	free(pipex->cmd_path);
-	free2(pipex->path);
-	free2(pipex->cmd);
-	free2(pipex->av);
-	free(pipex->path);
-	free(pipex->cmd);
-	free(pipex->av);
-	free(pipex);
-	exit(0);
-}
 
 void	forking(t_data *pipex, char **envp)
 {
@@ -73,6 +48,8 @@ void	piping(t_data *pipex, char **envp)
 		error(pipex, pipex->cmd);
 		forking(pipex, envp);
 		free2(pipex->cmd);
+		free(pipex->cmd_path);
+		free(pipex->cmd);
 		pipex->cmd = 0;
 		pipex->cmd_path = 0;
 		pipex->av_index++;
@@ -96,6 +73,7 @@ void	here(t_data *pipex)
 				break ;
 			write(pipex->fdin, buff, ft_strlen(buff));
 		}
+		free(buff);
 		dup2(pipex->fdin, 0);
 	}
 	else

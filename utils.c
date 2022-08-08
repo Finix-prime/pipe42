@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmethira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:45:51 by pmethira          #+#    #+#             */
-/*   Updated: 2022/08/07 17:51:04 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/08 13:59:51 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,4 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return (0);
-}
-
-int	al_count(char *str, char c)
-{
-	int		i;
-
-	i = 0;
-	while (str[i] != c && str[i])
-	{
-		i++;
-	}
-	return (i);
 }

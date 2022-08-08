@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmethira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:57:28 by pmethira          #+#    #+#             */
-/*   Updated: 2022/08/07 18:37:55 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/08 14:05:29 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,16 @@ int	wd_count(char const *s, char c)
 	return (word);
 }
 
-char	**free2(char **s)
+int	al_count(char *str, char c)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	while (s[i])
+	while (str[i] != c && str[i])
 	{
-		free(s[i]);
-		s++;
+		i++;
 	}
-	s = 0;
-	return (s);
+	return (i);
 }
 
 void	word_add(char *str, char c, char *list)

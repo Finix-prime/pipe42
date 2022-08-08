@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmethira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:33:50 by pmethira          #+#    #+#             */
-/*   Updated: 2022/08/06 21:09:19 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/08 14:01:39 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ char	*ft_strjoin_pipe(char const *s1, char const *s2);
 char	*get_next_line(int fd);
 void	freeall(t_data *pipex);
 char	**free2(char **s);
+void	error(t_data *pipex, char **cmd);
+void	path_join(char *s1, char *s2, char *dst);
 int		al_count(char *str, char c);
+void	forking(t_data *pipex, char **envp);
+void	piping(t_data *pipex, char **envp);
+void	here(t_data *pipex);
+void	init(t_data *pipex, int argc, char **argv, char **envp);
 
 #endif

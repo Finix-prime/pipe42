@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmethira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 20:55:29 by vnilprap          #+#    #+#             */
-/*   Updated: 2022/08/06 21:09:10 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/08 13:57:46 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,27 +86,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ft_memmove(ptr, (char *)(s + start), len);
 	ptr[len] = 0;
 	return (ptr);
-}
-
-void	path_join(char *s1, char *s2, char *dst)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		dst[i] = s1[i];
-		i++;
-	}
-	dst[i] = '/';
-	i++;
-	while (s2[j])
-	{
-		dst[i] = s2[j];
-		i++;
-		j++;
-	}
-	dst[i] = 0;
 }
