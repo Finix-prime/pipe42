@@ -1,4 +1,14 @@
-##
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/08/10 16:14:06 by pmethira          #+#    #+#              #
+#    Updated: 2022/08/10 16:14:59 by pmethira         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = pipex
 FLAGS = -Wall -Werror -Wextra -I
@@ -68,3 +78,5 @@ test3: test31 test32
 test4: test41 test42
 test5: test51 test52
 testb: testb1 testb2
+
+.PHONY: clean fclean all re

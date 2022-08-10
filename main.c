@@ -6,7 +6,7 @@
 /*   By: pmethira <pmethira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 19:01:30 by pmethira          #+#    #+#             */
-/*   Updated: 2022/08/08 16:43:22 by pmethira         ###   ########.fr       */
+/*   Updated: 2022/08/10 16:58:25 by pmethira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	here(t_data *pipex)
 			if (ft_strncmp(buff, pipex->av[2], ft_strlen(pipex->av[2])) == 0)
 				break ;
 			write(pipex->fdin, buff, ft_strlen(buff));
+			free(buff);
 		}
 		free(buff);
 		dup2(pipex->fdin, 0);
@@ -82,7 +83,6 @@ void	here(t_data *pipex)
 			O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		dup2(pipex->fdin, 0);
 	}
-	return ;
 }
 
 void	init(t_data *pipex, int argc, char **argv, char **envp)
